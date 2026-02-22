@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.npm/
+
+# Build outputs
+dist/
+build/
+*.zip
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Docker
+docker-compose.override.yml
+
+# Project specific
+typechain-types/
+artifacts/
+cache/
+.hardhat/
+.next/
+out/
+dist/
+build/
+*.zip
+git_paths_found.txt
+git_path.txt
+compile_errors.txt

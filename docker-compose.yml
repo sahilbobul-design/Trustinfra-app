@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: trustinfra_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=trustinfra
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - trustinfra_net
+
+  postgres:
+    image: postgres:15
+    container_name: trustinfra_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=trustinfra
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - trustinfra_net
+
+  redis:
+    image: redis:7
+    container_name: trustinfra_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - trustinfra_net
+
+  hardhat:
+    build:
+      context: .
+      dockerfile: Dockerfile.hardhat
+    container_name: trustinfra_hardhat
+    ports:
+      - "8545:8545"
+    networks:
+      - trustinfra_net
+
+networks:
+  trustinfra_net:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  postgres_data:
